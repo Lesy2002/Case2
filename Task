@@ -1,0 +1,44 @@
+import datetime
+
+# Функция для определения дня недели
+def get_weekday(day, month, year):
+    date = datetime.date(year, month, day)
+    return date.strftime("%A")  # Возвращает день недели в текстовом формате
+
+# Функция для проверки високосного года
+def is_leap_year(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+# Функция для вычисления возраста
+def calculate_age(day, month, year):
+    today = datetime.date.today()
+    birth_date = datetime.date(year, month, day)
+    age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+    return age
+
+# Функция для форматирования даты
+def format_date(day, month, year):
+    return f"{'*' * len(str(day))} {'*' * len(str(month))} {'*' * len(str(year))}"
+
+# Запрос данных о дате рождения у пользователя
+day = int(input("Введите день вашего рождения (число от 1 до 31): "))
+month = int(input("Введите месяц вашего рождения (число от 1 до 12): "))
+year = int(input("Введите год вашего рождения (например, 1990): "))
+
+# Определение дня недели
+weekday = get_weekday(day, month, year)
+
+# Проверка на високосный год
+leap_year = is_leap_year(year)
+
+# Вычисление возраста
+age = calculate_age(day, month, year)
+
+# Форматирование даты
+formatted_date = format_date(day, month, year)
+
+# Вывод результатов
+print(f"Вы родились в {weekday}.")
+print(f"{year} год {'високосный' if leap_year else 'не високосный'}.")
+print(f"Сейчас вам {age} лет.")
+print(f"Дата вашего рождения в формате: {formatted_date}.")
